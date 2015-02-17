@@ -65,9 +65,13 @@ int main()
   std::cout << "Running " << n_runs << " additions... " << std::endl;
   
   // serial version
-  for (int runs=0;runs<n_runs;++runs)
-    add(z, x, y, 0, size);
+  {
+    for (int runs=0;runs<n_runs;++runs)
+      add(z, x, y, 0, size);
 
+    std::cout << "Norm: " << z.norm() << std::endl;
+  }
+  
   // parallel version
   /*
   {
@@ -84,5 +88,6 @@ int main()
 	for (int i = 0; i < num_threads; ++i)
 	  t[i].join();
       }
+    std::cout << "Norm: " << z.norm() << std::endl;
   }*/
 }
