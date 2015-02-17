@@ -16,9 +16,9 @@ void call_from_thread(int tid)
 
 int main()
 {  
-  std::cout << "Starting ..." << std::endl;
-  
   const int num_threads = 4;
+  std::cout << "Starting " << num_threads << " threads ..." << std::endl;
+  
   std::thread t[num_threads];
 
   for (int i = 0; i < num_threads; ++i)
