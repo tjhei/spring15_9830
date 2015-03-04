@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -l select=2:ncpus=16:interconnect=fdr:mem=61gb
+#PBS -l walltime=1:00:00
+#PBS -j oe
+#PBS -N test
+##PBS -q compmath
+
+# load profile and modules:
+source /etc/profile.d/modules.sh
+source /home/heister/.bash_profile
+source /home/heister/deal-git/modules
+
+# compute processor count and print it:
+Nprocs=`qstat -xf $PBS_JOBID | grep List.ncpus | sed 's/^.\{26\}//'`
+cd $PBS_O_WORKDIR
+echo "Job $PBS_JOBID started at `date` on `hostname` using $Nprocs processors"
+
+# this is your program with optional command line args:
+cmd="./main"
+
+(time mpirun -n $Nprocs --mca btl openib,self,sm $cmd 2>&1) 
+
+echo "Job $PBS_JOBID complete at `date`"
+exit 0
