@@ -7,8 +7,8 @@
 
 # load profile and modules:
 source /etc/profile.d/modules.sh
-source /home/heister/.bash_profile
-source /home/heister/deal-git/modules
+source ~/.bash_profile
+source /home/heister/shared-dealii/modules
 
 # compute processor count and print it:
 Nprocs=`qstat -xf $PBS_JOBID | grep List.ncpus | sed 's/^.\{26\}//'`
